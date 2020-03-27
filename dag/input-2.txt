@@ -1,0 +1,6 @@
+p=c-g
+t=b-p
+d=a+c
+u=g*h
+e=t+u
+f=e-d

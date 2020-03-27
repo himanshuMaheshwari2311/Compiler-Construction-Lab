@@ -1,0 +1,29 @@
+int i, j, k, ind;
+    string follow;
+    if(current == 'S')
+        follow += '$';
+    for(i = 0; i < row; i++){
+        for(j = 3; grammar[i][j]; j++){
+            cout<<"Condition: "<<(isPresentRHS(current, grammar[i]) && isPresent(current, nonTerminals))<<" : "<<j<<" : "<<current<<endl;
+            if(isPresentRHS(current, grammar[i]) && isPresent(current, nonTerminals)){
+                //cout<<"Satisfied 1"<<endl;
+                ind = index(current,grammar[i]);
+                cout<<ind<<endl;
+                if(isPresent(grammar[i][ind + 1], epsilonNonTerminals) && grammar[i][ind + 2] == '/0'){
+                    cout<<"Null"<<endl;
+                }
+                else if(!isPresent(current, epsilonNonTerminals)){
+                    cout<<"Not Null"<<endl;
+                    if(grammar[i][j + 1] != '\0'){
+                        for(k = 0; k < countRHSOccurence[index(current, nonTerminals)]; k++){
+                            cout<<"Current: "<<grammar[k][j]<<" following: "<<grammar[k][j + 1]<<endl;
+                            cout<<"Position: "<< position(grammar[k][j + 1],row,i)<<endl;
+                            follow += firstOfNonTerminal(grammar[position(grammar[k][j + 1],row,i)],grammar[k][j + 1], row);
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    return follow;
